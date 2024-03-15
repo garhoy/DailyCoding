@@ -3,22 +3,23 @@ Given a string, find the length of the longest substring without repeating chara
 '''
 
 class Solution:
-    def lengthOfLongestSubstring(self, s):
-        vector = ""
-        count = 0
-        maxcount = 0
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        charIndexMap = {}
+        start = 0
+        maxLength = 0
         
-        for i in s:
-            if i in vector:
-                vector = ""
-                count = 0
+        for i, char in enumerate(s):
+            # If char is in the current substring
+            print(i,char,charIndexMap)
+            if char in charIndexMap and charIndexMap[char] >= start:
+                start = charIndexMap[char] + 1  # Move start right after the last occurrence of char
             else:
-                vector += i 
-                count +=1
+                maxLength = max(maxLength, i - start + 1)  # Update maxLength if we found a longer substring
+            
+            charIndexMap[char] = i  # Update the last seen index of char
+            
+        return maxLength
 
-            if maxcount < count: 
-                maxcount = count
-        return maxcount
 
 
-print(Solution().lengthOfLongestSubstring('abrkaabcdefghijjxxx'))
+print(Solution().lengthOfLongestSubstring('tmmzuxt'))
