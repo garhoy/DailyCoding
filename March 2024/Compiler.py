@@ -17,9 +17,30 @@ Output: True
 Input: "({[)]"
 Output: False
 '''
+
 class Solution:
-    def isValid(self, s):
-        pass
+    def isValid(self, s) -> bool:
+        parenthesis_map = {')': '(', '}': '{', ']': '['}
+        stack = []
+
+        
+        for char in s:
+            if char in parenthesis_map:  
+                if stack:
+                    top_element = stack.pop()
+                else:
+                    top_element = "."
+
+                if parenthesis_map[char] != top_element:
+                    return False
+            else: 
+                stack.append(char)
+
+        if not stack:
+            return True
+        else:
+            return False 
+        
 
 # Test Program
 s = "()(){(())" 
@@ -27,7 +48,7 @@ s = "()(){(())"
 print(Solution().isValid(s))
 
 s = ""
-# should return True
+# should return True    
 print(Solution().isValid(s))
 
 s = "([{}])()"
