@@ -14,10 +14,10 @@ def findCeilingFloor(root_node, k, floor=None, ceil=None):
             floor = root_node.val
             ceil = root_node.val
             break
-        elif root_node.val < k:  # Si el valor del nodo es menor que k, puede ser un nuevo floor.
+        elif root_node.val < k: 
             floor = root_node.val
             root_node = root_node.right
-        else:  # Si el valor del nodo es mayor que k, puede ser un nuevo ceil.
+        else:  
             ceil = root_node.val
             root_node = root_node.left
     return floor, ceil
